@@ -95,6 +95,13 @@ else ifeq ($(platform), qnx)
 	AR = QCC -Vgcc_ntoarmv7le
 	PLATFORM_DEFINES := -D__BLACKBERRY_QNX__ -fexceptions -marm -mcpu=cortex-a9 -mfpu=neon -mfloat-abi=softfp
 
+# Arietta G25 (ARMv5)
+else ifeq ($(platform), arietta)
+	TARGET := $(TARGET_NAME)_libretro_arietta.so
+	fpic := -fPIC
+	SHARED := -shared -Wl,-version-script=libretro/link.T
+	CC = arm-none-linux-gnueabi-gcc -march=armv5te -mcpu=arm926ej-s -mtune=arm926ej-s
+	CXX = arm-none-linux-gnueabi-g++ -march=armv5te -mcpu=arm926ej-s -mtune=arm926ej-s
 # PS3
 else ifeq ($(platform), ps3)
 	TARGET := $(TARGET_NAME)_libretro_ps3.a
